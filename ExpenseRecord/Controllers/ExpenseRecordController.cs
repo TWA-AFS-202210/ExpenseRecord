@@ -1,33 +1,49 @@
-﻿using ExpenseRecord.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ExpenseRecord.Models;
 using System;
+using ExpenseRecord.Services;
 
 namespace ExpenseRecord.Controllers
 {
     public class ExpenseRecordController : Controller
     {
-        private readonly IExpenseRecordService _expenseRecordService;
-
-        public ExpenseRecordController(IExpenseRecordService expenseRecordService)
+        private readonly CreateFullList _createFullList;
+        public ExpenseRecordController(CreateFullList createFullList)
         {
-            _expenseRecordService = expenseRecordService;
+            _createFullList = createFullList;
         }
         [Route("api/ExpenseRecord")]
         [HttpPost]
-        public async Task<IActionResult> CreateItemAsync(ExpenseItem expenseItem)
+        public List<ExpenseItem> CreateItemAsync(ExpenseItem expenseItem)
         {
-            try
+            var id = Guid.NewGuid().ToString();
+
+            var expenseGetItem = new ExpenseItem
             {
-                var id = await _expenseRecordService.CreateAsync(expenseItem);
-                var idString = new IdString();
-                idString.Id = id;
-                return Ok(idString);
-            }
-            catch (ExpenseRecordException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+                Id = id,
+                Description = expenseItem.Description,
+                Type = expenseItem.Type,
+                Amount = expenseItem.Amount,
+                Data = expenseItem.Data,
+            };
+            _createFullList.FullList.Add(expenseGetItem);
+            return _createFullList.FullList;
+        }
+
+        [Route("api/expenseRecord")]
+        [HttpGet]
+        public List<ExpenseItem> DeleteItemAsync(string id)
+        {
+            var index = _createFullList.FullList.FirstOrDefault(x => x.Id == id);
+            _createFullList.FullList.Remove(index);
+            return _createFullList.FullList;
+        }
+
+        [Route("api/expenseRecord")]
+        [HttpGet]
+        public List<ExpenseItem> GetAllItems()
+        {
+            return _createFullList.FullList;
         }
     }
 }
