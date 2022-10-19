@@ -1,1 +1,23 @@
-<p>record-item works!</p>
+<div class="header">
+  <button (click)="navToList()" class="button-default">Back to the List</button>
+</div>
+
+<form [formGroup]="formItem" class="body">
+  <div class="item-self">
+    <input formControlName="done" type="checkbox">
+    <input class="item-desc" formControlName="description">
+  </div>
+</form>
+
+<div class="footer">
+  <div>
+    <button (click)="delete()" *ngIf="item.id && !isNewItem()" class="button-red">Delete</button>
+  </div>
+  <div>
+    <span *ngIf="item.id && !isNewItem()">Created on {{item.createTime}}</span>
+  </div>
+  <div>
+    <button (click)="save()" [disabled]="formItem.invalid" class="button-blue">Save</button>
+  </div>
+</div>
+

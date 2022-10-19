@@ -18,18 +18,13 @@ export class RecordListComponent implements OnInit {
     this.loadData();
   }
 
-
-  reload(): void {
-    this.loadData();
-  }
-
   async navToCreateNew(): Promise<boolean> {
     return this.router.navigate(['item', 'new'], {
       relativeTo: this.route.parent
     });
   }
 
-  private loadData(): void {
+  public loadData(): void {
     this.service.getAll().subscribe(dataList => {
       console.log("data is :", dataList);
       this.service.displayList = dataList;

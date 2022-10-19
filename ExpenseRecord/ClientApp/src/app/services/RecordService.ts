@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 import { RecordItem } from '../models/RecordItemModel';
 
-//const apiEndPoint: string = "http://163.184.251.240:4814/api/v2/items";
 const apiEndPoint: string = "http://localhost:5225/api/v2/items"
 
 @Injectable({
