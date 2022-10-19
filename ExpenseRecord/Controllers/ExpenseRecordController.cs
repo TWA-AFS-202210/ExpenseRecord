@@ -1,15 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ExpenseRecord.Services;
+using Microsoft.AspNetCore.Mvc;
+using ExpenseRecord.Models;
+using System;
 
 namespace ExpenseRecord.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ExpenseRecordController : ControllerBase
+    public class ExpenseRecordController : Controller
     {
-        [HttpGet]
-        public string greet()
+        private readonly IExpenseRecordService _expenseRecordService;
+
+        public ExpenseRecordController(IExpenseRecordService expenseRecordService)
         {
-            return "Hello World";
+            _expenseRecordService = expenseRecordService;
+        }
+        [Route("api/ExpenseRecord")]
+        [HttpPost]
+        public async Task<IActionResult> CreateItemAsync(ExpenseItem expenseItem)
+        {
+            try
+            {
+                var id = await _expenseRecordService.CreateAsync(expenseItem);
+                var idString = new IdString();
+                idString.Id = id;
+                return Ok(idString);
+            }
+            catch (ExpenseRecordException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
