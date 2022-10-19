@@ -1,4 +1,4 @@
-﻿namespace ConsumeRecord
+﻿namespace ExpenseRecord.ConsumeRecordDto
 {
     public class ConsumeRecord
     {
