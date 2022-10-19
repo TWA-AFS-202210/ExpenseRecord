@@ -16,11 +16,6 @@ namespace Service.ConsumeRecordService
 
         public async Task<List<ConsumeRecord>> GetAll()
         {
-            ConsumeRecord re = new ConsumeRecord();
-            re.description = "aaaaaaaa";
-            re.type = "meal";
-            re.amount = 22;
-            AddOne(re);
             return consumeRecordList;
         }
 

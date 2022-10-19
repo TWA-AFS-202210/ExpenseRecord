@@ -41,6 +41,8 @@ namespace ExpenseRecord.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route(@"{Id}")]
         public async Task<IActionResult> DeleteOne([FromRoute] string id)
         {
             try
