@@ -1,0 +1,16 @@
+<div class="title">
+  <span>ConsumeRecord List</span>
+</div>
+<div class="search">
+  <button (click)="reload()" class="button-default">Reload</button>
+</div>
+<div class="list">
+  <ng-container *ngFor="let item of service.displayList ">
+    <div class="item">
+      <span class="item-desc">{{item.description}}</span>
+    </div>
+  </ng-container>
+</div>
+<div class="create-item">
+  <button (click)="navToCreateNew()" class="button-blue">Create New Item</button>
+</div>

@@ -8,7 +8,7 @@
 
         public string? type { get; set; }
 
-        public int? amount { get; set; }
+        public float? amount { get; set; }
 
         public DateTime? date { get; set; }
     }

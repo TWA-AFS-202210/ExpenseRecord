@@ -6,10 +6,13 @@ using Nancy.Json;
 
 namespace ExpenseRecord.Controllers
 {
+    [ApiController]
+    [Route("api/v2/items")]
     public class ConsumeRecordController : Controller
     {
         private ConsumeRecordService consumeRecordService;
 
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -24,6 +27,7 @@ namespace ExpenseRecord.Controllers
             
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddOne(ConsumeRecord OneRecord)
         {
             try

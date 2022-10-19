@@ -9,6 +9,7 @@ namespace Service.ConsumeRecordService
         public async Task<string> AddOne(ConsumeRecord oneRecord)
         {
             oneRecord.Id = Guid.NewGuid().ToString();   
+            oneRecord.date = DateTime.Now;
             consumeRecordList.Add(oneRecord);
             return oneRecord.Id;
         }
